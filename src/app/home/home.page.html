@@ -1,25 +1,29 @@
 <ion-header>
   <ion-toolbar>
-      <ion-title>Cálculo de Média</ion-title>
+      <ion-title>
+          Lista de gêneros musicais
+      </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-  
-  <h1>Simulação</h1>
+
+<ion-content class="ion-padding">
+
   <ion-list>
       <ion-item>
-          <ion-input type="text" label="Nome" labelPlacement="floating" [(ngModel)]="nome"/>
-      </ion-item>
-      <ion-item>
-          <ion-input type="text" label="Sobrenome" labelPlacement="floating" [(ngModel)]="sobrenome"/>
-      </ion-item>
-      <ion-item>
-          <ion-input type="text" label="Nome completo" labelPlacement="floating" [value]="nomeCompleto" readonly/>
+          <ion-input labelPlacement="floating" label="Nome" [(ngModel)]="nome"></ion-input>
       </ion-item>
   </ion-list>
 
-  <ion-button (click)="concatenarNomes()">
-      Concatenar
-  </ion-button>
+  <ion-button (click)="adicionar()">Adicionar</ion-button>
 
+  <ion-list>
+      <ion-item *ngFor="let item of items; let posicao = index;">
+          <ion-label>
+              {{ item.titulo }}
+          </ion-label>
+          <ion-button color="danger" slot="end" (click)="remover(posicao)">
+              <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-button>
+      </ion-item>
+  </ion-list>
 </ion-content>

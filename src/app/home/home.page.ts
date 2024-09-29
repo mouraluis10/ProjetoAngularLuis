@@ -1,36 +1,50 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IonicModule, AlertController } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonicModule, FormsModule],
+  imports: [IonicModule, CommonModule, FormsModule],
 })
 export class HomePage {
-  public nome: string = "";
-  public sobrenome: string = "";
-  public nomeCompleto: string = "";
 
-  constructor(private alertController:AlertController) { }
+  public nome = "";
 
-  async aviso() {
+  public items: any[] = [
+    {
+      titulo: "Forró"
+    },
+    {
+      titulo: "Rock"
+    },
+    {
+      titulo: "Sertanejo"
+    },
+    {
+      titulo: "Funk"
+    },
+  ]
 
-    const mensagem = await this.alertController.create({
-      header: 'Nome completo',
-      message: 'O seu nome completo é ' + this.nomeCompleto,
-      buttons: ["OK"]
-    });
+  constructor() { }
 
-    await mensagem.present();
+  adicionar() {
+    // Adicionando no array
+    this.items.push(
+      {
+        titulo: this.nome
+      }
+    );
+    // Limpando campo nome
+    this.nome = "";
   }
 
-  concatenarNomes(){
-    this.nomeCompleto = this.nome + " " + this.sobrenome;
-    this.aviso();
+  remover(posicao:number){
+    console.log(posicao);
+    this.items.splice(posicao, 1);
   }
-  
+
 }
